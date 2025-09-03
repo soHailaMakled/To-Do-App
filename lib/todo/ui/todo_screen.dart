@@ -41,7 +41,7 @@ class TodoScreen extends StatelessWidget {
                 'text': state.todos[i],
                 'index': i,
                 'priority': state.priorities[i], // إضافة الأولوية
-                'date': state.dates[i], // إضافة التاريخ
+                'date': state.dueDates[i], // إضافة التاريخ
               };
               if (state.completed[i]) {
                 completedTodos.add(todoData);

@@ -1,37 +1,29 @@
 import 'package:equatable/equatable.dart';
 
-abstract class TodoEvent extends Equatable {
-  const TodoEvent();
+abstract class TodoEvent {}
 
-  @override
-  List<Object> get props => [];
-}
+class LoadTodosEvent extends TodoEvent {}
 
 class AddTodoEvent extends TodoEvent {
-  final String todoText;
+  final String task;
   final String priority;
-  final DateTime date;
+  final DateTime? dueDate;
 
-  const AddTodoEvent(this.todoText, {required this.priority, required this.date});
-
-  @override
-  List<Object> get props => [todoText, priority, date];
-}
-
-class DeleteTodoEvent extends TodoEvent {
-  final int index;
-
-  const DeleteTodoEvent(this.index);
-
-  @override
-  List<Object> get props => [index];
+  AddTodoEvent({
+    required this.task,
+    required this.priority,
+    this.dueDate,
+  });
 }
 
 class ToggleTodoEvent extends TodoEvent {
   final int index;
 
-  const ToggleTodoEvent(this.index);
+  ToggleTodoEvent(this.index);
+}
 
-  @override
-  List<Object> get props => [index];
+class DeleteTodoEvent extends TodoEvent {
+  final int index;
+
+  DeleteTodoEvent(this.index);
 }

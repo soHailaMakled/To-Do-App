@@ -1,44 +1,40 @@
 import 'package:equatable/equatable.dart';
 
-class TodoState extends Equatable {
+class TodoState {
   final List<String> todos;
   final List<bool> completed;
   final List<String> priorities;
-  final List<DateTime> dates;
+  final Map<int, DateTime?> dueDates;
 
-  const TodoState({
+  TodoState({
     required this.todos,
     required this.completed,
     required this.priorities,
-    required this.dates,
+    required this.dueDates,
   });
 
-  factory TodoState.initial() => const TodoState(
-    todos: [],
-    completed: [],
-    priorities: [],
-    dates: [],
-  );
+  factory TodoState.initial() {
+    return TodoState(
+      todos: [],
+      completed: [],
+      priorities: [],
+      dueDates: {},
+    );
+  }
 
   TodoState copyWith({
     List<String>? todos,
     List<bool>? completed,
     List<String>? priorities,
-    List<DateTime>? dates,
+    Map<int, DateTime?>? dueDates,
   }) {
     return TodoState(
       todos: todos ?? this.todos,
       completed: completed ?? this.completed,
       priorities: priorities ?? this.priorities,
-      dates: dates ?? this.dates,
+      dueDates: dueDates ?? this.dueDates,
     );
   }
 
   int get completedCount => completed.where((c) => c).length;
-
-  @override
-  List<Object> get props => [todos, completed, priorities, dates];
-
-  List<DateTime> get dueDates => dates;
-
 }

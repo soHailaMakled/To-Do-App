@@ -45,10 +45,15 @@ class _AddTaskBottomSheetState extends State<AddTaskBottomSheet> {
         children: [
           Text(
             'Add New Task',
-            style: Theme.of(context).textTheme.headlineSmall?.copyWith(fontWeight: FontWeight.bold),
+            style: Theme.of(context)
+                .textTheme
+                .headlineSmall
+                ?.copyWith(fontWeight: FontWeight.bold),
             textAlign: TextAlign.center,
           ),
           const SizedBox(height: 20),
+
+          // Task Input
           TextField(
             controller: _controller,
             decoration: InputDecoration(
@@ -62,6 +67,7 @@ class _AddTaskBottomSheetState extends State<AddTaskBottomSheet> {
             ),
           ),
           const SizedBox(height: 15),
+
           // Date Picker
           OutlinedButton.icon(
             onPressed: () => _selectDate(context),
@@ -78,7 +84,8 @@ class _AddTaskBottomSheetState extends State<AddTaskBottomSheet> {
             ),
           ),
           const SizedBox(height: 20),
-          // Priority Selector (example with three buttons)
+
+          // Priority Selector
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
@@ -88,14 +95,16 @@ class _AddTaskBottomSheetState extends State<AddTaskBottomSheet> {
             ],
           ),
           const SizedBox(height: 20),
+
+          // Save Button
           ElevatedButton(
             onPressed: () {
               if (_controller.text.isNotEmpty) {
                 context.read<TodoBloc>().add(
                   AddTodoEvent(
-                    _controller.text,
+                    task: _controller.text,
                     priority: _selectedPriority,
-                    date: _selectedDate,
+                    dueDate: _selectedDate,
                   ),
                 );
                 Navigator.pop(context);
@@ -108,7 +117,10 @@ class _AddTaskBottomSheetState extends State<AddTaskBottomSheet> {
               ),
               backgroundColor: Theme.of(context).primaryColor,
             ),
-            child: const Text('Save Task', style: TextStyle(color: Colors.white)),
+            child: const Text(
+              'Save Task',
+              style: TextStyle(color: Colors.white),
+            ),
           ),
           const SizedBox(height: 20),
         ],
